@@ -1,24 +1,27 @@
+import { createSupabaseServerClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import Card from "@/components/common/Card";
 
-import { createSupabaseServerClient } from '@/utils/supabase/server'
-import { cookies } from 'next/headers'
-import Card from '@/components/common/Card'
 export default async function Page() {
-  const cookieStore = cookies()
-  const supabase = createSupabaseServerClient(cookieStore)
+  const cookieStore = cookies();
+  const supabase = createSupabaseServerClient(cookieStore);
 
-  const { data: categories, error } = await supabase.from('categories').select('*');
+  const { data: products, error } = await supabase.from("products").select("*");
 
   if (error) {
-    console.error('Error fetching categories:', error.message);
+    console.error("Error fetching products:", error.message);
   }
 
-  console.log(categories);
+  const productsWithImages = products?.map((product) => ({
+    ...product,
+    imageUrl: `https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/images/${product.image_path}`,
+  }));
 
   return (
-    <main className='grid grid-cols-4'>
-      {categories?.map((category) => (
-        <Card category={category} />
+    <main className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 place-items-center">
+      {productsWithImages?.map((product) => (
+        <Card key={product.id} product={product} />
       ))}
     </main>
-  )
+  );
 }

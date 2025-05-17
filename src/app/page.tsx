@@ -1,7 +1,98 @@
-export default function Home() {
+import { createSupabaseServerClient } from "@/utils/supabase/server";
+import { cookies } from "next/headers";
+import Card from "@/components/common/Card";
+import Link from "next/link";
+import SearchBar from "@/components/common/SearchBar";
+
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const rawSearch = (await searchParams)?.search ?? "";
+  const search =
+    typeof rawSearch === "string"
+      ? rawSearch.toLowerCase()
+      : Array.isArray(rawSearch) && rawSearch.length > 0
+      ? rawSearch[0].toLowerCase()
+      : "";
+  const cookieStore = cookies();
+  const supabase = createSupabaseServerClient(cookieStore);
+
+  const { data: products, error } = await supabase.from("products").select("*");
+
+  if (error) {
+    console.error("Error fetching products:", error.message);
+  }
+
+  const productsWithImages: Product[] = (products ?? []).map((product) => ({
+    ...product,
+    imageUrl: `https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/images/${product.image_path}`,
+  }));
+
+  const filteredProducts = productsWithImages.filter((product) =>
+    product.title.toLowerCase().includes(search)
+  );
+
+  const groupedByCategory: Record<string, Product[]> = filteredProducts.reduce(
+    (acc, product) => {
+      const category = product.category || "Uncategorized";
+      if (!acc[category]) {
+        acc[category] = [];
+      }
+      acc[category].push(product);
+      return acc;
+    },
+    {} as Record<string, Product[]>
+  );
+
   return (
-    <main>
-      <h1>Home</h1>
+    <main className="flex flex-col items-center justify-center gap-24">
+      <SearchBar />
+      {Object.entries(groupedByCategory).map(([category, items]) => (
+        <section
+          key={category}
+          id={category}
+          className="flex flex-col items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
+        >
+          <div className="flex items-center gap-1.5">
+            <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
+              {category}
+            </h1>
+            <Link
+              href={`/products/${category}`}
+              className="text-sm font-medium underline"
+            >
+              view more
+            </Link>
+          </div>
+          <div className="grid grid-cols-5 max-xl:hidden gap-4">
+            {items.slice(0, 10).map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="grid xl:hidden lg:grid-cols-4 max-lg:hidden gap-4">
+            {items.slice(0, 8).map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="grid lg:hidden md:grid-cols-3 max-md:hidden gap-4">
+            {items.slice(0, 6).map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="grid md:hidden sm:grid-cols-2 max-sm:hidden gap-4">
+            {items.slice(0, 4).map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
+          </div>
+          <div className="grid sm:hidden grid-cols-1 gap-4">
+            {items.slice(0, 4).map((product) => (
+              <Card key={product.id} product={product} />
+            ))}
+          </div>
+        </section>
+      ))}
     </main>
   );
 }

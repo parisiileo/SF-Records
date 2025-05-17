@@ -1,0 +1,20 @@
+[
+  {
+    "id": 4,
+    "label": "Available",
+    "original": "עכשיו באתר",
+    "url": "/#available"
+  },
+  {
+    "id": 3,
+    "label": "Singles",
+    "original": "סינגלים",
+    "url": "/#singles"
+  },
+  {
+    "id": 2,
+    "label": "Preorder",
+    "original": "הזמנה מוקדמת",
+    "url": "/#preorder"
+  }
+]
