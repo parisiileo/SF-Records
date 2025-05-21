@@ -2,7 +2,6 @@ import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Card from "@/components/common/Card";
 import Link from "next/link";
-import { Navbar } from "@/components/common/Navbar";
 
 export default async function Home({
   searchParams,

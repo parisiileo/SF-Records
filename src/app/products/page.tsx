@@ -1,7 +1,6 @@
 import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Card from "@/components/common/Card";
-import { main } from "framer-motion/client";
 
 export default async function Page() {
   const cookieStore = cookies();

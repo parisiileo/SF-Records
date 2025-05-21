@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import { motion } from "framer-motion";
 
-const Card = ({ product }: any) => {
+const Card = ({ product }: { product: any }) => {
   return (
     <motion.div
       whileHover={{ y: -5 }}

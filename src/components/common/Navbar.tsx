@@ -4,7 +4,7 @@ import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
 export const Navbar = () => {
   const path = usePathname();
@@ -35,7 +35,9 @@ export const Navbar = () => {
             </Link>
           ))}
         </section>
-        <SearchBar />
+        <Suspense fallback={<h1>Loading...</h1>}>
+          <SearchBar />
+        </Suspense>
       </div>
     </nav>
   );
