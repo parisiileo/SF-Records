@@ -1,5 +1,11 @@
 [
   {
+    "id": 1,
+    "label": "ALL",
+    "original": "חדש",
+    "url": "/products"
+  },
+  {
     "id": 4,
     "label": "Available",
     "original": "עכשיו באתר",

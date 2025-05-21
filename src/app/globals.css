@@ -6,6 +6,7 @@ body {
   scrollbar-gutter: stable;
   overflow-x: hidden;
   background-color: #5f5f5f;
+  scroll-behavior: smooth;
 }
 
 *::selection {

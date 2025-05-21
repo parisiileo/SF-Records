@@ -2,7 +2,7 @@ import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Card from "@/components/common/Card";
 import Link from "next/link";
-import SearchBar from "@/components/common/SearchBar";
+import { Navbar } from "@/components/common/Navbar";
 
 export default async function Home({
   searchParams,
@@ -36,7 +36,7 @@ export default async function Home({
 
   const groupedByCategory: Record<string, Product[]> = filteredProducts.reduce(
     (acc, product) => {
-      const category = product.category || "Uncategorized";
+      const category = product.category || "More";
       if (!acc[category]) {
         acc[category] = [];
       }
@@ -47,13 +47,12 @@ export default async function Home({
   );
 
   return (
-    <main className="flex flex-col items-center justify-center gap-24">
-      <SearchBar />
+    <main className="flex flex-col items-center w-full justify-center gap-24">
       {Object.entries(groupedByCategory).map(([category, items]) => (
         <section
           key={category}
           id={category}
-          className="flex flex-col items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
+          className="flex flex-col relative w-full scroll-mt-64 mt-24 items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
         >
           <div className="flex items-center gap-1.5">
             <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
@@ -66,27 +65,27 @@ export default async function Home({
               view more
             </Link>
           </div>
-          <div className="grid grid-cols-5 max-xl:hidden gap-4">
+          <div className="grid grid-cols-5 w-full max-xl:hidden gap-4">
             {items.slice(0, 10).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid xl:hidden lg:grid-cols-4 max-lg:hidden gap-4">
+          <div className="grid w-full xl:hidden lg:grid-cols-4 max-lg:hidden gap-4">
             {items.slice(0, 8).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid lg:hidden md:grid-cols-3 max-md:hidden gap-4">
+          <div className="grid w-full lg:hidden md:grid-cols-3 max-md:hidden gap-4">
             {items.slice(0, 6).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid md:hidden sm:grid-cols-2 max-sm:hidden gap-4">
+          <div className="grid w-full md:hidden sm:grid-cols-2 max-sm:hidden gap-4">
             {items.slice(0, 4).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid sm:hidden grid-cols-1 gap-4">
+          <div className="grid w-full sm:hidden grid-cols-1 gap-4">
             {items.slice(0, 4).map((product) => (
               <Card key={product.id} product={product} />
             ))}

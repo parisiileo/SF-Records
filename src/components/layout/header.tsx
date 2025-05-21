@@ -3,38 +3,26 @@ import Image from "next/image";
 import React from "react";
 import logo from "../../assets/logo.svg";
 import Link from "next/link";
-import categories from "@/data/headerCategories.json";
+import { Navbar } from "../common/Navbar";
 
 const Header = () => {
   return (
-    <nav className="flex flex-col gap-3 items-center justify-center">
-      <section className="grid grid-cols-3 w-full py-5">
-        <section className="flex w-full items-center"></section>
+    <nav className="flex flex-col gap-3 items-center justify-center fixed top-0 left-0 right-0 z-50 bg-[#5f5f5f]">
+      <section className="w-full flex items-center py-5">
         <section className="flex w-full items-center justify-center">
           <Link href="/">
             <Image
               src={logo}
               alt="logo"
-              width={105}
-              height={105}
+              width={125}
+              height={125}
               draggable={false}
               className="select-none"
             />
           </Link>
         </section>
-        <section className="flex w-full items-center justify-end"></section>
       </section>
-      <section className="flex justify-center items-center gap-8">
-        {categories.map((category: Category) => (
-          <Link
-            key={category.id}
-            href={`${category.url}`}
-            className="font-medium hover:underline"
-          >
-            {category.label}
-          </Link>
-        ))}
-      </section>
+      <Navbar />
     </nav>
   );
 };

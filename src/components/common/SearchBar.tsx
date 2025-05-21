@@ -1,5 +1,6 @@
 "use client";
 
+import { SearchIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -23,14 +24,15 @@ export default function SearchBar() {
   }, [value]);
 
   return (
-    <div className="flex justify-center w-full">
+    <div className="flex justify-center items-center w-full">
       <input
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Search for a product..."
-        className="w-full max-w-md px-4 py-2 rounded-xl bg-[#6b6b6b] shadow-md focus:shadow-lg transition-all duration-300 focus:outline-none"
+        className="w-full max-w-md px-4 py-2 focus:outline-none"
       />
+      <SearchIcon size={18} />
     </div>
   );
 }

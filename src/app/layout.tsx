@@ -30,7 +30,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[2500px] mx-auto`}
       >
         <Header />
-        <main className="xl:max-w-9/12 lg:max-w-10/12 max-w-11/12 mx-auto mt-24 min-h-screen">
+        <main className="xl:max-w-9/12 lg:max-w-10/12 max-w-11/12 mx-auto mt-64 mb-32 min-h-screen">
           {children}
         </main>
         <Footer />
