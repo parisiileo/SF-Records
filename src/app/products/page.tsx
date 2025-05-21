@@ -25,7 +25,7 @@ export default async function Page() {
       <h1 className="text-3xl mt-20 font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
         All Products
       </h1>
-      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 place-items-center">
+      <div className="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-4 place-items-center">
         {productsWithImages?.map((product) => (
           <Card key={product.id} product={product} />
         ))}
