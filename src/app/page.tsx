@@ -64,12 +64,12 @@ export default async function Home({
               view more
             </Link>
           </div>
-          <div className="grid grid-cols-5 w-full max-xl:hidden gap-4">
+          <div className="flex justify-center w-full flex-wrap max-xl:hidden gap-4">
             {items.slice(0, 10).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid w-full xl:hidden lg:grid-cols-4 max-lg:hidden gap-4">
+          <div className="flex justify-center w-full xl:hidden max-lg:hidden gap-4">
             {items.slice(0, 8).map((product) => (
               <Card key={product.id} product={product} />
             ))}
@@ -79,12 +79,12 @@ export default async function Home({
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid w-full md:hidden sm:grid-cols-2 max-sm:hidden gap-4">
+          <div className="grid w-full md:hidden sm:grid-cols-2 items-center max-sm:hidden gap-4">
             {items.slice(0, 4).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="grid w-full sm:hidden grid-cols-1 gap-4">
+          <div className="flex flex-col w-full sm:hidden items-center justify-center gap-4">
             {items.slice(0, 4).map((product) => (
               <Card key={product.id} product={product} />
             ))}

@@ -24,7 +24,7 @@ export default function SearchBar() {
   }, [value]);
 
   return (
-    <div className="flex justify-center items-center w-full">
+    <div className="flex justify-center items-center md:w-[25%] min-w-[225px] w-full md:max-w-[369px] max-w-[305px]">
       <input
         type="text"
         value={value}
