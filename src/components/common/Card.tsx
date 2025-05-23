@@ -55,7 +55,7 @@ const Card = ({ product }: { product: any }) => {
         <DialogDescription>{product?.description}</DialogDescription>
         <div className="flex justify-between mt-4">
           <Link
-            href="https://www.instagram.com/sfrecords/"
+            href="https://www.instagram.com/records_sf"
             className="text-sm flex items-center gap-1.5 cursor-pointer font-semibold text-white bg-[#121212] rounded-sm px-3 py-1.5"
           >
             Contact <Instagram size={16} />
