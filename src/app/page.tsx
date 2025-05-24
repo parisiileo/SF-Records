@@ -51,7 +51,7 @@ export default async function Home({
         <section
           key={category}
           id={category}
-          className="flex flex-col relative w-full scroll-mt-64 mt-24 items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
+          className="flex flex-col relative w-full mt-24 items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
         >
           <div className="flex items-center gap-1.5">
             <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">

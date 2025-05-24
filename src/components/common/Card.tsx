@@ -6,22 +6,40 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Instagram } from "lucide-react";
+import { Check, CircleAlert, Instagram, Plus } from "lucide-react";
 import Link from "next/link";
+import classNames from "classnames";
+import { toast } from "sonner";
 
 const Card = ({ product }: { product: any }) => {
+  const [added, setAdded] = React.useState(false);
+
+  const addToCart = () => {
+    if (product?.category == "Out Of Stock") {
+      toast.error("Product is out of stock");
+      return;
+    } else if (product?.category == "Back-Order") {
+      toast.error("Product not available yet, contact us for more info");
+      return;
+    }
+    setAdded(true);
+    setTimeout(() => {
+      setAdded(false);
+    }, 1200);
+  };
+
+  console.log(product);
   return (
     <Dialog>
       <DialogTrigger asChild>
         <motion.div
           whileHover={{ y: -5 }}
           transition={{ type: "spring", stiffness: 200, damping: 15 }}
-          className="p-4 w-full max-h-[275px] min-h-[275px] max-w-[265px] flex cursor-pointer flex-col justify-between gap-3 items-center"
+          className="p-4 w-full relative max-h-[275px] min-h-[275px] max-w-[265px] flex cursor-pointer flex-col justify-between gap-3 items-center"
           key={product?.id}
         >
           <Image
@@ -32,6 +50,21 @@ const Card = ({ product }: { product: any }) => {
             priority
             className="max-w-[200px] max-h-[125px] object-cover"
           />
+          {product?.badge_tooltip && (
+            <div
+              className={classNames(
+                product?.category == "Out Of Stock"
+                  ? "bg-red-500/90 text-white"
+                  : "bg-white",
+                "flex gap-1.5 px-2 py-1 rounded-sm font-normal justify-between items-center absolute right-0 top-1/2 translate-y-[-50%]"
+              )}
+            >
+              <span className="text-xs font-medium">
+                {product?.badge_tooltip}
+              </span>
+              {product?.category == "Out Of Stock" && <CircleAlert size={15} />}
+            </div>
+          )}
           <h1 className="text-sm font-medium text-center max-w-3/4 line-clamp-2">
             {product?.title}
           </h1>
@@ -64,6 +97,24 @@ const Card = ({ product }: { product: any }) => {
             {product?.price}.00 <span className="text-xl">₪</span>
           </p>
         </div>
+        <button
+          disabled={added}
+          onClick={addToCart}
+          className={classNames(
+            (added || !product?.availability_status) && "bg-[#121212]/75",
+            "w-full cursor-pointer text-white flex items-center font-medium justify-center gap-2 py-2 bg-[#121212] rounded-lg"
+          )}
+        >
+          {added ? (
+            <>
+              Added <Check size={16} />
+            </>
+          ) : (
+            <>
+              Add to Cart <Plus size={16} />
+            </>
+          )}
+        </button>
       </DialogContent>
     </Dialog>
   );

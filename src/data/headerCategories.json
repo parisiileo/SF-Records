@@ -1,26 +1,14 @@
 [
   {
     "id": 1,
-    "label": "ALL",
-    "original": "חדש",
-    "url": "/products"
-  },
-  {
-    "id": 4,
-    "label": "Available",
-    "original": "עכשיו באתר",
-    "url": "/#available"
-  },
-  {
-    "id": 3,
-    "label": "Singles",
-    "original": "סינגלים",
-    "url": "/#singles"
+    "label": "HOME",
+    "original": "דף הבית",
+    "url": "/"
   },
   {
     "id": 2,
-    "label": "Preorder",
-    "original": "הזמנה מוקדמת",
-    "url": "/#preorder"
+    "label": "ALL",
+    "original": "חדש",
+    "url": "/products"
   }
 ]

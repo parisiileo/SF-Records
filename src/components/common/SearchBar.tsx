@@ -30,7 +30,7 @@ export default function SearchBar() {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="Search for a product..."
-        className="w-full max-w-md px-4 py-2 focus:outline-none"
+        className="w-full max-w-md px-4 py-2 focus:outline-none placeholder:text-stone-700"
       />
       <SearchIcon size={18} />
     </div>
