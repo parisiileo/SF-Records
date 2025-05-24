@@ -1,11 +1,11 @@
 "use client";
 
-import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/navigation";
 
 export const Navbar = () => {
   const path = usePathname();
