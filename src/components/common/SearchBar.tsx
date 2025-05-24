@@ -18,7 +18,7 @@ export default function SearchBar() {
       } else {
         params.delete("search");
       }
-      router.replace(`/?${params.toString()}`);
+      //router.replace(`/?${params.toString()}`);
     });
 
     return () => clearTimeout(timeout);

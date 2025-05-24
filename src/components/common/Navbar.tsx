@@ -1,12 +1,12 @@
 "use client";
 
-import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
+import { Link } from "@/i18n/navigation";
 
 export const Navbar = () => {
   const path = usePathname();
@@ -46,6 +46,7 @@ export const Navbar = () => {
             <Link
               key={category.id}
               href={category.url}
+              locale={category.locale ?? locale}
               className={`sm:text-[17px] text-base font-bold transition-all duration-300 ${
                 category.url === path
                   ? "opacity-100"
@@ -57,9 +58,7 @@ export const Navbar = () => {
                   : "opacity-75 hover:opacity-100"
               }`}
               onClick={() => {
-                if (category.locale) {
-                  handleLocaleSwitch(category.url, category.locale);
-                }
+                console.log(category.locale ?? locale);
                 setActiveCategory(category.key);
               }}
             >
