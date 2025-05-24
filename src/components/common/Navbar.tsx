@@ -6,7 +6,7 @@ import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { useRouter } from "@/i18n/navigation";
+import { useRouter } from "next/navigation";
 
 export const Navbar = () => {
   const path = usePathname();
