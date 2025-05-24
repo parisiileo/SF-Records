@@ -14,7 +14,7 @@ export default async function Page() {
 
   const productsWithImages = products?.map((product) => ({
     ...product,
-    imageUrl: `https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/images/${product.image_path}`,
+    imageUrl: `https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/images/${product.image_path.trimEnd()}`,
   }));
 
   console.log(productsWithImages);

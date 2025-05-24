@@ -14,6 +14,7 @@ import { Check, CircleAlert, Instagram, Plus } from "lucide-react";
 import Link from "next/link";
 import classNames from "classnames";
 import { toast } from "sonner";
+import { useLocale, useTranslations } from "next-intl";
 
 const Card = ({ product }: { product: any }) => {
   const [added, setAdded] = React.useState(false);
@@ -27,13 +28,19 @@ const Card = ({ product }: { product: any }) => {
       toast.error("Product not available yet, contact us for more info");
       return;
     }
+    if (product?.category == "Pre Order") {
+      toast.error("Product not available yet, contact us for more info");
+      return;
+    }
     setAdded(true);
     setTimeout(() => {
       setAdded(false);
     }, 1200);
   };
 
-  console.log(product);
+  const locale = useLocale();
+  const t = useTranslations("Other");
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -86,13 +93,15 @@ const Card = ({ product }: { product: any }) => {
           priority
           className="max-w-[300px] max-h-[175px] object-cover mx-auto"
         />
-        <DialogDescription>{product?.description}</DialogDescription>
+        <DialogDescription>
+          {locale == "en" ? product?.description : product?.description_he}
+        </DialogDescription>
         <div className="flex justify-between mt-4">
           <Link
             href="https://www.instagram.com/records_sf"
             className="text-sm flex items-center gap-1.5 cursor-pointer font-semibold text-white bg-[#121212] rounded-sm px-3 py-1.5"
           >
-            Contact <Instagram size={16} />
+            {t("Contact")} <Instagram size={16} />
           </Link>
           <p className="font-medium">
             {product?.price}.00 <span className="text-xl">₪</span>
@@ -108,11 +117,11 @@ const Card = ({ product }: { product: any }) => {
         >
           {added ? (
             <>
-              Added <Check size={16} />
+              {t("Added")} <Check size={16} />
             </>
           ) : (
             <>
-              Add to Cart <Plus size={16} />
+              {t("Add to cart")} <Plus size={16} />
             </>
           )}
         </button>

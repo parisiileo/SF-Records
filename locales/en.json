@@ -1,0 +1,21 @@
+{
+  "Categories": {
+    "Back Order": "Back Order",
+    "Pre Order": "Pre Order",
+    "Available": "Available",
+    "Singles": "Singles",
+    "Out Of Stock": "Out Of Stock"
+  },
+  "Other": {
+    "All": "All",
+    "Home": "Home",
+    "About": "About",
+    "Contact": "Contact",
+    "Added": "Added",
+    "Add to cart": "Add to Cart",
+    "Cart": "Cart",
+    "View More": "View More",
+    "Search": "Search for a product...",
+    "Hebrew": "עִברִית"
+  }
+}

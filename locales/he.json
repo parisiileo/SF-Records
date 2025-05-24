@@ -1,0 +1,21 @@
+{
+  "Categories": {
+    "Back Order": "הזמנה חוזרת",
+    "Pre Order": "הזמנה מראש",
+    "Available": "זמין",
+    "Singles": "בודדים",
+    "Out Of Stock": "אזל מהמלאי"
+  },
+  "Other": {
+    "All": "הכל",
+    "Home": "דף הבית",
+    "About": "אודות",
+    "Contact": "צור קשר",
+    "Added": "הוסף לעגלה",
+    "Add to cart": "הוסף לעגלה",
+    "Cart": "עגלה",
+    "View More": "הצג עוד",
+    "Search": "חפש מוצר...",
+    "English": "English"
+  }
+}

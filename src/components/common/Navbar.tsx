@@ -4,18 +4,36 @@ import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useLocale, useTranslations } from "next-intl";
 
 export const Navbar = () => {
   const path = usePathname();
   const [activeCategory, setActiveCategory] = useState("");
 
-  console.log(path);
+  const t = useTranslations("Other");
+  const locale = useLocale();
+  const newCategories = [...categories];
+
+  if (locale == "en") {
+    newCategories.push({
+      id: categories.length + 1,
+      key: "Hebrew",
+      url: "/he",
+    });
+  } else {
+    newCategories.push({
+      id: categories.length + 1,
+      key: "English",
+      url: "/en",
+    });
+  }
+
   return (
     <nav className="w-full bg-[#bbbbbb] xl:max-w-9/12 lg:max-w-10/12 max-w-11/12">
       <div className="mx-auto flex md:flex-row flex-col justify-between gap-4 py-4 items-center">
         <section className="flex items-center sm:gap-8 gap-4 uppercase">
-          {categories.map((category: Category) => (
+          {newCategories.map((category: Category) => (
             <Link
               key={category.id}
               href={category.url}
@@ -25,13 +43,13 @@ export const Navbar = () => {
                   : "opacity-75 hover:opacity-100"
               }
               ${
-                activeCategory === category.label
+                activeCategory === category.key
                   ? "opacity-100"
                   : "opacity-75 hover:opacity-100"
               }`}
-              onClick={() => setActiveCategory(category.label)}
+              onClick={() => setActiveCategory(category.key)}
             >
-              {category.label}
+              {t(category.key)}
             </Link>
           ))}
         </section>

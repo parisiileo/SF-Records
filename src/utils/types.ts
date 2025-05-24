@@ -1,7 +1,6 @@
 type Category = {
   id: number;
-  label: string;
-  original: string;
+  key: string;
   url: string;
 };
 

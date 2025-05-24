@@ -2,6 +2,7 @@ import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Card from "@/components/common/Card";
 import Link from "next/link";
+import { getTranslations } from "next-intl/server";
 
 export default async function Home({
   searchParams,
@@ -26,7 +27,7 @@ export default async function Home({
 
   const productsWithImages: Product[] = (products ?? []).map((product) => ({
     ...product,
-    imageUrl: `https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/images/${product.image_path}`,
+    imageUrl: `https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/images/${product.image_path.trimEnd()}`,
   }));
 
   const filteredProducts = productsWithImages.filter((product) =>
@@ -45,6 +46,9 @@ export default async function Home({
     {} as Record<string, Product[]>
   );
 
+  const cat = await getTranslations("Categories");
+  const other = await getTranslations("Other");
+
   return (
     <main className="flex flex-col items-center w-full justify-center gap-24">
       {Object.entries(groupedByCategory).map(([category, items]) => (
@@ -55,13 +59,13 @@ export default async function Home({
         >
           <div className="flex items-center gap-1.5">
             <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
-              {category}
+              {cat(category)}
             </h1>
             <Link
               href={`/products/${category}`}
               className="text-sm font-medium underline"
             >
-              view more
+              {other("View More")}
             </Link>
           </div>
           <div className="flex justify-center w-full flex-wrap max-xl:hidden gap-4">
