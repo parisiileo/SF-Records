@@ -1,12 +1,13 @@
 "use client";
 
 import { SearchIcon } from "lucide-react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function SearchBar() {
   const router = useRouter();
+  const locale = useLocale();
   const searchParams = useSearchParams();
   const [value, setValue] = useState(searchParams.get("search") || "");
 
@@ -18,7 +19,7 @@ export default function SearchBar() {
       } else {
         params.delete("search");
       }
-      //router.replace(`/?${params.toString()}`);
+      router.replace(`/${locale}?${params.toString()}`);
     });
 
     return () => clearTimeout(timeout);
