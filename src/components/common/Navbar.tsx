@@ -21,14 +21,14 @@ export const Navbar = () => {
       id: categories.length + 1,
       key: "Hebrew",
       locale: "he",
-      url: "/",
+      url: "/he",
     });
   } else {
     newCategories.push({
       id: categories.length + 1,
       key: "English",
       locale: "en",
-      url: "/",
+      url: "/en",
     });
   }
 
