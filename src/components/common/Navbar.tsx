@@ -35,7 +35,8 @@ export const Navbar = () => {
   const router = useRouter();
 
   const handleLocaleSwitch = (url: string, locale: string) => {
-    router.push(url, { locale: locale });
+    console.log("Switching locale to:", locale);
+    router.push("/", { locale: locale });
   };
 
   useEffect(() => {
