@@ -4,7 +4,7 @@ import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
-import { Suspense, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 
@@ -35,8 +35,12 @@ export const Navbar = () => {
   const router = useRouter();
 
   const handleLocaleSwitch = (url: string, locale: string) => {
-    router.replace(url);
+    router.push(url, { locale: locale });
   };
+
+  useEffect(() => {
+    console.log("Current locale:", locale);
+  }, [locale]);
 
   return (
     <nav className="w-full bg-[#bbbbbb] xl:max-w-9/12 lg:max-w-10/12 max-w-11/12">
