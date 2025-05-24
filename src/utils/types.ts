@@ -1,6 +1,7 @@
 type Category = {
   id: number;
   key: string;
+  locale?: string;
   url: string;
 };
 

@@ -1,11 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
 import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 export const Navbar = () => {
   const path = usePathname();
@@ -13,21 +14,29 @@ export const Navbar = () => {
 
   const t = useTranslations("Other");
   const locale = useLocale();
-  const newCategories = [...categories];
+  const newCategories: Category[] = [...categories];
 
   if (locale == "en") {
     newCategories.push({
       id: categories.length + 1,
       key: "Hebrew",
-      url: "/he",
+      locale: "he",
+      url: "/",
     });
   } else {
     newCategories.push({
       id: categories.length + 1,
       key: "English",
-      url: "/en",
+      locale: "en",
+      url: "/",
     });
   }
+
+  const router = useRouter();
+
+  const handleLocaleSwitch = (url: string, locale: string) => {
+    router.push(url, { locale });
+  };
 
   return (
     <nav className="w-full bg-[#bbbbbb] xl:max-w-9/12 lg:max-w-10/12 max-w-11/12">
@@ -47,7 +56,12 @@ export const Navbar = () => {
                   ? "opacity-100"
                   : "opacity-75 hover:opacity-100"
               }`}
-              onClick={() => setActiveCategory(category.key)}
+              onClick={() => {
+                if (category.locale) {
+                  handleLocaleSwitch(category.url, category.locale);
+                }
+                setActiveCategory(category.key);
+              }}
             >
               {t(category.key)}
             </Link>
