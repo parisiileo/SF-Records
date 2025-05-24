@@ -22,7 +22,8 @@ const Card = ({ product }: { product: any }) => {
     if (product?.category == "Out Of Stock") {
       toast.error("Product is out of stock");
       return;
-    } else if (product?.category == "Back-Order") {
+    }
+    if (product?.category == "Back Order") {
       toast.error("Product not available yet, contact us for more info");
       return;
     }
