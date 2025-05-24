@@ -4,7 +4,7 @@ import Link from "next/link";
 import SearchBar from "@/components/common/SearchBar";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 
@@ -21,27 +21,22 @@ export const Navbar = () => {
       id: categories.length + 1,
       key: "Hebrew",
       locale: "he",
-      url: "/he",
+      url: "/",
     });
   } else {
     newCategories.push({
       id: categories.length + 1,
       key: "English",
       locale: "en",
-      url: "/en",
+      url: "/",
     });
   }
 
   const router = useRouter();
 
   const handleLocaleSwitch = (url: string, locale: string) => {
-    console.log("Switching locale to:", locale);
-    router.push("/", { locale: locale });
+    router.push("/he");
   };
-
-  useEffect(() => {
-    console.log("Current locale:", locale);
-  }, [locale]);
 
   return (
     <nav className="w-full bg-[#bbbbbb] xl:max-w-9/12 lg:max-w-10/12 max-w-11/12">
