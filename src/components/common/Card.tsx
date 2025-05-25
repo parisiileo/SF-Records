@@ -20,19 +20,12 @@ import { addPackage } from "@/lib/store/slices/cart";
 
 const Card = ({ product }: { product: any }) => {
   const dispatch = useDispatch();
+  const t = useTranslations("Other");
   const [added, setAdded] = React.useState(false);
 
   const addToCart = (pkg: Product) => {
     if (product?.category == "Out Of Stock") {
-      toast.error("Product is out of stock");
-      return;
-    }
-    if (product?.category == "Back Order") {
-      toast.error("Product not available yet, contact us for more info");
-      return;
-    }
-    if (product?.category == "Pre Order") {
-      toast.error("Product not available yet, contact us for more info");
+      toast.error(t("Product is out of stock"));
       return;
     }
     setAdded(true);
@@ -43,7 +36,6 @@ const Card = ({ product }: { product: any }) => {
   };
 
   const locale = useLocale();
-  const t = useTranslations("Other");
 
   return (
     <Dialog>
