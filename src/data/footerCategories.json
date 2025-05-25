@@ -22,5 +22,17 @@
       "key": "Back Order",
       "url": "/back-order"
     }
+  ],
+  "More": [
+    {
+      "id": 1,
+      "key": "Instagram",
+      "url": "/https://www.instagram.com/records_sf"
+    },
+    {
+      "id": 2,
+      "key": "About Us",
+      "url": "/about-us"
+    }
   ]
 }

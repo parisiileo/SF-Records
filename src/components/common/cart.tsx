@@ -47,7 +47,7 @@ const Cart = () => {
           <PopoverTrigger asChild className="relative cursor-pointer">
             <div className="relative">
               <ShoppingCart size={22} />
-              <span className="absolute -top-3 -right-2">
+              <span className="absolute text-sm -top-3 -right-3 bg-[#acacac] text-[#3b3b3b] rounded-full w-4 h-4 flex items-center justify-center">
                 {cart.data.length}
               </span>
             </div>

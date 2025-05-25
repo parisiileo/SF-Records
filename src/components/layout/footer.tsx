@@ -5,7 +5,7 @@ import footerCategories from "@/data/footerCategories.json";
 
 const Footer = () => {
   return (
-    <footer className="flex flex-col gap-10 py-6 max-w-10/12 mx-auto">
+    <footer className="flex flex-col gap-10 py-6 mb-16 max-w-10/12 mx-auto">
       <div className="flex items-center justify-between ">
         <Link
           href="/"
@@ -43,6 +43,20 @@ const Footer = () => {
           <div className="font-bold">Information</div>
           <div className="flex flex-col mt-3">
             {footerCategories.Information.map((info) => (
+              <Link
+                key={info.id}
+                href={info.url}
+                className="text-nowrap underline-offset-2 hover:underline"
+              >
+                {info.key}
+              </Link>
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col flex-wrap">
+          <div className="font-bold">Contact & About Us</div>
+          <div className="flex flex-col mt-3">
+            {footerCategories.More.map((info) => (
               <Link
                 key={info.id}
                 href={info.url}
