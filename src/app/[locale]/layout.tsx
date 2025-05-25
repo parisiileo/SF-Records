@@ -7,6 +7,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 import Header from "@/components/layout/header";
+import StoreProvider from "@/lib/provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,19 +37,21 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[2500px] mx-auto`}
-      >
-        <NextIntlClientProvider>
-          <Header />
-          <main className="xl:max-w-9/12 lg:max-w-10/12 max-w-11/12 mx-auto mt-64 mb-32 min-h-screen">
-            {children}
-          </main>
-          <Footer />
-          <Toaster position="top-center" />
-        </NextIntlClientProvider>
-      </body>
-    </html>
+    <StoreProvider>
+      <html lang={locale}>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[2500px] mx-auto`}
+        >
+          <NextIntlClientProvider>
+            <Header />
+            <main className="xl:max-w-9/12 lg:max-w-10/12 max-w-11/12 mx-auto mt-64 mb-32 min-h-screen">
+              {children}
+            </main>
+            <Footer />
+            <Toaster position="top-center" />
+          </NextIntlClientProvider>
+        </body>
+      </html>
+    </StoreProvider>
   );
 }

@@ -15,11 +15,14 @@ import Link from "next/link";
 import classNames from "classnames";
 import { toast } from "sonner";
 import { useLocale, useTranslations } from "next-intl";
+import { useDispatch } from "react-redux";
+import { addPackage } from "@/lib/store/slices/cart";
 
 const Card = ({ product }: { product: any }) => {
+  const dispatch = useDispatch();
   const [added, setAdded] = React.useState(false);
 
-  const addToCart = () => {
+  const addToCart = (pkg: Product) => {
     if (product?.category == "Out Of Stock") {
       toast.error("Product is out of stock");
       return;
@@ -33,6 +36,7 @@ const Card = ({ product }: { product: any }) => {
       return;
     }
     setAdded(true);
+    dispatch(addPackage(pkg));
     setTimeout(() => {
       setAdded(false);
     }, 1200);
@@ -109,7 +113,7 @@ const Card = ({ product }: { product: any }) => {
         </div>
         <button
           disabled={added}
-          onClick={addToCart}
+          onClick={() => addToCart(product)}
           className={classNames(
             (added || !product?.availability_status) && "bg-[#121212]/75",
             "w-full cursor-pointer text-white flex items-center font-medium justify-center gap-2 py-2 bg-[#121212] rounded-lg"
