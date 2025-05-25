@@ -1,16 +1,18 @@
 "use client";
 
 import { RootState } from "@/lib/store";
-import { Instagram, ShoppingCart } from "lucide-react";
+import { Instagram, ShoppingCart, X } from "lucide-react";
 import { useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
+import { removePackage } from "@/lib/store/slices/cart";
 
 const Cart = () => {
   const { cart } = useSelector((state: RootState) => state.cart);
+  const dispatch = useDispatch();
 
   const productsWithQuantity = useMemo(() => {
     const products: {
@@ -40,6 +42,10 @@ const Cart = () => {
     toast.error("Cart is empty");
   };
 
+  const removeProduct = (id: Number) => {
+    dispatch(removePackage(id.toString()));
+  };
+
   return (
     <>
       {cart.data.length > 0 ? (
@@ -55,7 +61,10 @@ const Cart = () => {
           <PopoverContent>
             <div className="flex flex-col gap-2">
               {productsWithQuantity.map(({ product, quantity, imageUrl }) => (
-                <div key={product.id} className="flex">
+                <div key={product.id} className="flex relative">
+                  <div className="absolute z-50 top-2 bg-[#c4c4c4] p-[2px] rounded-sm -right-[6px] cursor-pointer">
+                    <X size={16} onClick={() => removeProduct(product.id)} />
+                  </div>
                   <Image
                     src={imageUrl}
                     alt={product.title}
@@ -70,7 +79,7 @@ const Cart = () => {
                     </span>
                     <div className="w-full flex justify-between">
                       <span className="font-medium">{product.price}₪</span>
-                      <span>x{quantity}</span>
+                      <span>{quantity}</span>
                     </div>
                   </div>
                 </div>
