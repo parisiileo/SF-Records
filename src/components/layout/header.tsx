@@ -3,7 +3,7 @@ import Image from "next/image";
 import React from "react";
 import categories from "@/data/headerCategories.json";
 import { usePathname } from "next/navigation";
-import { Suspense, useState } from "react";
+import { useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import SearchBar from "../common/SearchBar";
@@ -73,15 +73,11 @@ const Header = () => {
           ))}
         </section>
         <div className="flex justify-end w-full max-md:hidden">
-          <Suspense>
-            <SearchBar />
-          </Suspense>
+          <SearchBar />
         </div>
       </nav>
       <div className="flex justify-center w-full md:hidden">
-        <Suspense>
-          <SearchBar />
-        </Suspense>
+        <SearchBar />
       </div>
     </div>
   );

@@ -61,10 +61,7 @@ export default async function Home({
             <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
               {cat(category)}
             </h1>
-            <Link
-              href={`/products/${category}`}
-              className="text-sm font-medium underline"
-            >
+            <Link href={`/all`} className="text-sm font-medium underline">
               {other("View More")}
             </Link>
           </div>
