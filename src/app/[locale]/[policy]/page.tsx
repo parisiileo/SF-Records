@@ -2,13 +2,7 @@ import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import React from "react";
 
-type Props = {
-  params: {
-    policy: string;
-  };
-};
-
-export default async function Page({ params }: Props) {
+export default async function Page({ params }: any) {
   const { policy } = params;
   const cookieStore = cookies();
   const supabase = createSupabaseServerClient(cookieStore);
