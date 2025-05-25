@@ -57,10 +57,10 @@ const Card = ({ product }: { product: any }) => {
           <Image
             src={product.imageUrl}
             alt={product.title}
-            width={200}
-            height={125}
+            width={250}
+            height={150}
             priority
-            className="max-w-[200px] max-h-[125px] object-cover"
+            className="sm:max-w-[250px] max-h-[125px] max-w-[200px] sm:max-h-[150px] object-cover"
           />
           {product?.badge_tooltip && (
             <div
@@ -77,7 +77,7 @@ const Card = ({ product }: { product: any }) => {
               {product?.category == "Out Of Stock" && <CircleAlert size={15} />}
             </div>
           )}
-          <h1 className="text-sm font-medium text-center max-w-3/4 line-clamp-2">
+          <h1 className="sm:text-[15px] text-sm font-medium text-center max-w-3/4 line-clamp-2">
             {product?.title}
           </h1>
           <p className="font-medium">
