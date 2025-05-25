@@ -36,7 +36,7 @@ export default async function LocaleLayout({
   }
 
   return (
-    <html lang={locale} dir={locale === "he" ? "rtl" : "ltr"}>
+    <html lang={locale}>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-[2500px] mx-auto`}
       >

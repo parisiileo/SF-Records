@@ -1,6 +1,6 @@
 "use client";
 
-import { div } from "framer-motion/client";
+import { usePathname } from "@/i18n/navigation";
 import { SearchIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -10,6 +10,7 @@ export default function SearchBar() {
   const router = useRouter();
   const locale = useLocale();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const [value, setValue] = useState(searchParams.get("search") || "");
 
   useEffect(() => {
@@ -20,7 +21,7 @@ export default function SearchBar() {
       } else {
         params.delete("search");
       }
-      router.replace(`/${locale}?${params.toString()}`);
+      router.replace(`/${locale}/${pathname}?${params.toString()}`);
     });
 
     return () => clearTimeout(timeout);

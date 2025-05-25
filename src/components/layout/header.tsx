@@ -13,8 +13,6 @@ const Header = () => {
     "https://boyutxpagmnxawcpshkt.supabase.co/storage/v1/object/public/logo/logo.svg";
 
   const path = usePathname();
-  const [activeCategory, setActiveCategory] = useState("");
-
   const t = useTranslations("Other");
   const locale = useLocale();
   const newCategories: Category[] = [...categories];
@@ -38,7 +36,7 @@ const Header = () => {
   return (
     <div className="flex flex-col px-6 gap-3 pb-4 fixed top-0 left-0 right-0 z-50 bg-[#bbbbbb] xl:max-w-10/12 lg:max-w-11/12 w-full mx-auto">
       <nav className="md:grid md:grid-cols-3 flex items-center justify-between">
-        <Link href="/" className="w-fit">
+        <Link href="/" className="w-fit md:hidden">
           <Image
             src={logo}
             alt="logo"
@@ -48,7 +46,7 @@ const Header = () => {
             className="select-none min-w-[110px]"
           />
         </Link>
-        <section className="flex items-center justify-center sm:gap-8 gap-4 uppercase">
+        <section className="flex items-center sm:gap-8 gap-4 uppercase">
           {newCategories.map((category: Category) => (
             <Link
               key={category.id}
@@ -58,20 +56,24 @@ const Header = () => {
                 category.url === path
                   ? "opacity-100"
                   : "opacity-75 hover:opacity-100"
-              }
-              ${
-                activeCategory === category.key
-                  ? "opacity-100"
-                  : "opacity-75 hover:opacity-100"
               }`}
-              onClick={() => {
-                setActiveCategory(category.key);
-              }}
             >
               {t(category.key)}
             </Link>
           ))}
         </section>
+        <div className="flex justify-center max-md:hidden">
+          <Link href="/" className="w-fit">
+            <Image
+              src={logo}
+              alt="logo"
+              width={125}
+              height={125}
+              draggable={false}
+              className="select-none min-w-[110px]"
+            />
+          </Link>
+        </div>
         <div className="flex justify-end w-full max-md:hidden">
           <SearchBar />
         </div>

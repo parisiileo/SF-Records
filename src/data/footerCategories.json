@@ -1,0 +1,26 @@
+{
+  "Policies": [
+    {
+      "id": 1,
+      "key": "Shipping Policy",
+      "url": "/shipping-policy"
+    },
+    {
+      "id": 2,
+      "key": "Returns & Cancellations Policy",
+      "url": "/rc-policy"
+    }
+  ],
+  "Information": [
+    {
+      "id": 1,
+      "key": "Pre Order",
+      "url": "/pre-order"
+    },
+    {
+      "id": 2,
+      "key": "Back Order",
+      "url": "/back-order"
+    }
+  ]
+}

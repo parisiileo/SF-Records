@@ -1,7 +1,6 @@
 import { createSupabaseServerClient } from "@/utils/supabase/server";
 import { cookies } from "next/headers";
 import Card from "@/components/common/Card";
-import Link from "next/link";
 import { getTranslations } from "next-intl/server";
 
 export default async function Home({
@@ -47,51 +46,60 @@ export default async function Home({
   );
 
   const cat = await getTranslations("Categories");
-  const other = await getTranslations("Other");
+
+  const categoryOrder = [
+    "Available",
+    "Singles",
+    "Pre Order",
+    "Back Order",
+    "Out Of Stock",
+  ];
 
   return (
     <main className="flex flex-col items-center w-full justify-center gap-24">
-      {Object.entries(groupedByCategory).map(([category, items]) => (
-        <section
-          key={category}
-          id={category}
-          className="flex flex-col relative w-full mt-24 items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
-        >
-          <div className="flex items-center gap-1.5">
-            <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
-              {cat(category)}
-            </h1>
-            <Link href={`/all`} className="text-sm font-medium underline">
-              {other("View More")}
-            </Link>
-          </div>
-          <div className="flex justify-center w-full flex-wrap max-xl:hidden gap-4">
-            {items.slice(0, 8).map((product) => (
-              <Card key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="flex justify-center w-full flex-wrap xl:hidden max-lg:hidden gap-4">
-            {items.slice(0, 8).map((product) => (
-              <Card key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="grid w-full lg:hidden md:grid-cols-3 max-md:hidden gap-4">
-            {items.slice(0, 6).map((product) => (
-              <Card key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="grid w-full md:hidden sm:grid-cols-2 items-center max-sm:hidden gap-4">
-            {items.slice(0, 4).map((product) => (
-              <Card key={product.id} product={product} />
-            ))}
-          </div>
-          <div className="flex flex-col w-full sm:hidden items-center justify-center gap-4">
-            {items.slice(0, 4).map((product) => (
-              <Card key={product.id} product={product} />
-            ))}
-          </div>
-        </section>
-      ))}
+      {categoryOrder
+        .filter((category) => groupedByCategory[category])
+        .map((category) => {
+          const items = groupedByCategory[category];
+          return (
+            <section
+              key={category}
+              id={category}
+              className="flex flex-col relative w-full mt-24 items-center justify-center max-md:max-w-10/12 max-xs:max-w-full mx-auto"
+            >
+              <div className="flex items-center gap-1.5">
+                <h1 className="text-3xl font-bold mb-4 capitalize hover:opacity-85 transition-all duration-300">
+                  {cat(category)}
+                </h1>
+              </div>
+              <div className="flex justify-center w-full flex-wrap max-xl:hidden gap-4">
+                {items.slice(0, 8).map((product) => (
+                  <Card key={product.id} product={product} />
+                ))}
+              </div>
+              <div className="flex justify-center w-full flex-wrap xl:hidden max-lg:hidden gap-4">
+                {items.slice(0, 8).map((product) => (
+                  <Card key={product.id} product={product} />
+                ))}
+              </div>
+              <div className="grid w-full lg:hidden md:grid-cols-3 max-md:hidden gap-4">
+                {items.slice(0, 6).map((product) => (
+                  <Card key={product.id} product={product} />
+                ))}
+              </div>
+              <div className="grid w-full md:hidden sm:grid-cols-2 items-center max-sm:hidden gap-4">
+                {items.slice(0, 4).map((product) => (
+                  <Card key={product.id} product={product} />
+                ))}
+              </div>
+              <div className="flex flex-col w-full sm:hidden items-center justify-center gap-4">
+                {items.slice(0, 4).map((product) => (
+                  <Card key={product.id} product={product} />
+                ))}
+              </div>
+            </section>
+          );
+        })}
     </main>
   );
 }
