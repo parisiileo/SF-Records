@@ -9,7 +9,7 @@ type Props = {
 };
 
 export default async function Page({ params }: Props) {
-  const { policy } = await params;
+  const { policy } = params;
   const cookieStore = cookies();
   const supabase = createSupabaseServerClient(cookieStore);
   const { data, error } = await supabase
