@@ -81,7 +81,7 @@ const Card = ({ product }: { product: any }) => {
           </p>
         </motion.div>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="sm:max-w-[450px] sm:p-10 p-4">
         <DialogHeader>
           <DialogTitle>{product?.title}</DialogTitle>
         </DialogHeader>

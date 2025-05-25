@@ -1,5 +1,6 @@
 "use client";
 
+import { div } from "framer-motion/client";
 import { SearchIcon } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useRouter, useSearchParams } from "next/navigation";
@@ -28,13 +29,13 @@ export default function SearchBar() {
   const t = useTranslations("Other");
 
   return (
-    <div className="flex justify-center items-center md:w-[25%] min-w-[225px] w-full md:max-w-[369px] max-w-[305px]">
+    <div className="flex justify-center items-center px-4 py-2 md:w-[60%] min-w-[250px] w-full md:max-w-[369px] max-w-[305px] bg-[#0a0a0a]/2 rounded-sm">
       <input
         type="text"
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder={t("Search")}
-        className="w-full max-w-md px-4 py-2 focus:outline-none placeholder:text-stone-700"
+        className="w-full max-w-md focus:outline-none placeholder:text-stone-700"
       />
       <SearchIcon size={18} />
     </div>

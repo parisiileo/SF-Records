@@ -69,11 +69,11 @@ export default async function Home({
             </Link>
           </div>
           <div className="flex justify-center w-full flex-wrap max-xl:hidden gap-4">
-            {items.slice(0, 10).map((product) => (
+            {items.slice(0, 8).map((product) => (
               <Card key={product.id} product={product} />
             ))}
           </div>
-          <div className="flex justify-center w-full xl:hidden max-lg:hidden gap-4">
+          <div className="flex justify-center w-full flex-wrap xl:hidden max-lg:hidden gap-4">
             {items.slice(0, 8).map((product) => (
               <Card key={product.id} product={product} />
             ))}
